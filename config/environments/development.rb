@@ -53,4 +53,8 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.x.webpacker[:dev_server_host] = "http://localhost:8080"
+
+  config.generators do |g|
+    g.test_framework :rspec
+  end
 end
