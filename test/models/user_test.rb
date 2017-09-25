@@ -12,19 +12,19 @@ class UserTest < ActiveSupport::TestCase
   test 'is invalid without email' do
     u = user
     u.email = ''
-    assert(u.valid? == false )
+    assert(!u.valid?)
   end
 
   test 'is invalid without password' do
     u = user
     u.password_digest = ''
-    assert(u.valid? == false)
+    assert(!u.valid?)
   end
 
   test 'is invalid when password is shorter than 8 chars' do
     u = user
     u.password = '1'
-    assert(u.valid? == false)
+    assert(!u.valid?)
   end
 
   private

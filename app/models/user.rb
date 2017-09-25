@@ -3,6 +3,6 @@ class User < ApplicationRecord
 
   attr_accessor :password
 
-  validates :email, presence: true, length: { minimum: 8 }
-  validates :password, presence: true
+  validates :email, :password,  presence: true
+  validates :password, length: { minimum: 8 }
 end
