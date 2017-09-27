@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :questions, only: [:index, :create, :update, :show, :destroy] do
         resources :answers, only: [:index, :create, :update, :show, :destroy]
       end
+      resources :answers, only: [:index, :create, :update, :show, :destroy]
     end
   end
 end
