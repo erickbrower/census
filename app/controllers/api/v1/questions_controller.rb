@@ -1,10 +1,11 @@
 class Api::V1::QuestionsController < ApiController
   def index
-    if params[:user_id]
-      render json: Question.where(user_id: params[:user_id]).all
+    if params[:exam_id]
+      @questions = Question.where(exam_id: params[:exam_id]).all
     else
-      render json: Question.all
+      @questions = Question.all
     end
+    render json: @questions
   end
 
   def create

@@ -1,7 +1,12 @@
 class Api::V1::ExamsController < ApiController
 
   def index
-    render json: Exam.all
+    if params[:user_id]
+      @exams = Exam.where(user_id: params[:user_id]).all
+    else
+      @exams = Exam.all
+    end
+    render json: @exams
   end
 
   def create
