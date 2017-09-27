@@ -12,6 +12,19 @@ class Api::V1::UsersController < ApiController
     end
   end
 
+  def update
+    @user = User.where(id: params[:id]).first
+    if @user
+      if @user.update_attributes(user_attributes)
+        render json: @user, location: "/api/v1/users/#{@user.id}"
+      else
+        respond_with_errors(@user)
+      end
+    else
+      render json: {}, status: :not_found
+    end
+  end
+
   def show
     @user = User.where(params[:id]).first
     if @user
@@ -34,8 +47,8 @@ class Api::V1::UsersController < ApiController
   private
   def user_params
     params.require(:data).permit(:type, {
-      attributes: [:email, :password]
-    })
+      attributes: [:email, :password, :password_confirmation]
+      })
   end
 
   def user_attributes

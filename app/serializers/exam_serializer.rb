@@ -1,3 +1,3 @@
 class ExamSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :title
 end
