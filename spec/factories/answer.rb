@@ -3,7 +3,7 @@ require 'faker'
 FactoryGirl.define do
   factory :answer do
     text { Faker::TheFreshPrinceOfBelAir.quote }
-    exam
+    question
 
     trait :without_text do
       text ''

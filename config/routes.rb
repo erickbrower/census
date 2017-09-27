@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :users
-      resources :exams
+      resources :users, only: [:index, :create, :update, :show, :destroy] do
+        resources :exams, only: [:index, :create, :update, :show, :destroy]
+      end
+      resources :exams, only: [:index, :create, :update, :show, :destroy] do
+        resources :questions, only: [:index, :create, :update, :show, :destroy]
+      end
+      resources :questions, only: [:index, :create, :update, :show, :destroy] do
+        resources :answers, only: [:index, :create, :update, :show, :destroy]
+      end
     end
   end
 end
