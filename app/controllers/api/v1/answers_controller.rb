@@ -1,7 +1,10 @@
 class Api::V1::AnswersController < ApiController
   def index
     if params[:question_id]
-      @answers = Answer.where(question_id: params[:question_id]).all
+      @answers = Answer
+        .where(question_id: params[:question_id])
+        .order(:letter)
+        .all
     else
       @answers = Answer.all
     end
@@ -55,7 +58,7 @@ class Api::V1::AnswersController < ApiController
   private
   def answer_params
     params.require(:data).permit(:type, {
-      attributes: [:text, :question_id]
+      attributes: [:letter, :text, :question_id]
       })
   end
 

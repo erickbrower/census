@@ -20,7 +20,9 @@ import 'rxjs/add/operator/switchMap';
       </tr>
       <tr>
         <td></td>
-        <td>Show Answers here</td>
+        <td>
+          <app-answer-list [question]="question"></app-answer-list>
+        </td>
       </tr>
     </table>
   </div>

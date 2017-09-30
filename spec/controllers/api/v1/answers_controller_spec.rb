@@ -21,6 +21,7 @@ RSpec.describe Api::V1::AnswersController, type: :controller do
           data: {
             type: 'answers',
             attributes: {
+              letter: new_answer.letter,
               text: new_answer.text,
               question_id: question.id
             }

@@ -15,17 +15,19 @@ question1 = Question.create(number: 1, text: "What is your favorite color?", exa
 question2 = Question.create(number: 2, text: "What is the square root of 4?", exam: exam)
 question3 = Question.create(number: 3, text: "Who is the president of the US?", exam: exam)
 
-answer11 = Answer.create(text: "blue", question: question1)
-answer12 = Answer.create(text: "green", question: question1)
-answer13 = Answer.create(text: "black", question: question1, correct: true)
-answer14 = Answer.create(text: "red", question: question1)
+answer11 = Answer.create(letter: 'A', text: "blue", question: question1)
+answer12 = Answer.create(letter: 'B', text: "green", question: question1)
+answer13 = Answer.create(letter: 'C', text: "black", question: question1, correct: true)
+answer14 = Answer.create(letter: 'D', text: "red", question: question1)
 
-answer21 = Answer.create(text: "1", question: question2)
-answer22 = Answer.create(text: "5", question: question2)
-answer23 = Answer.create(text: "4", question: question2)
-answer24 = Answer.create(text: "2", question: question2, correct: true)
+answer21 = Answer.create(letter: 'A', text: "1", question: question2)
+answer22 = Answer.create(letter: 'B', text: "5", question: question2)
+answer23 = Answer.create(letter: 'C', text: "4", question: question2)
+answer24 = Answer.create(letter: 'D', text: "2", question: question2, correct: true)
 
-answer31 = Answer.create(text: "Tyler Durden", question: question3)
-answer32 = Answer.create(text: "Hillary Clinton", question: question3)
-answer33 = Answer.create(text: "Tom Bombadil", question: question3)
-answer34 = Answer.create(text: "Donald Trump", question: question3, correct: true)
+answer31 = Answer.create(letter: 'A', text: "Tyler Durden", question: question3)
+answer32 = Answer.create(letter: 'B', text: "Hillary Clinton", question: question3)
+answer33 = Answer.create(letter: 'C', text: "Tom Bombadil", question: question3)
+answer34 = Answer.create(letter: 'D', text: "Donald Trump", question: question3, correct: true)
+
+puts "Seeded DB!"

@@ -21,4 +21,8 @@ Rails.application.routes.draw do
       resources :answers, only: [:index, :create, :update, :show, :destroy]
     end
   end
+
+  get '*path', to: 'pages#index', constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
 end
