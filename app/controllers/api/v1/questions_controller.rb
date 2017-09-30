@@ -1,7 +1,10 @@
 class Api::V1::QuestionsController < ApiController
   def index
     if params[:exam_id]
-      @questions = Question.where(exam_id: params[:exam_id]).all
+      @questions = Question
+        .where(exam_id: params[:exam_id])
+        .order(:number)
+        .all
     else
       @questions = Question.all
     end

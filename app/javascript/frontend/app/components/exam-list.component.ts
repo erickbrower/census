@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ExamService } from './services/exam.service';
-import { Exam } from './models/exam';
+import { ExamService } from '../services/exam.service';
+import { Exam } from '../models/exam';
 
 @Component({
   selector: 'app-exam-list',

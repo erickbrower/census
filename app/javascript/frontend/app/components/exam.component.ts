@@ -1,7 +1,9 @@
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { ExamService } from './services/exam.service';
 import { Location } from '@angular/common';
+
+import { Exam } from '../models/exam';
+import { ExamService } from '../services/exam.service';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -11,6 +13,7 @@ import 'rxjs/add/operator/switchMap';
   <div class="page-header">
     <h1>{{exam.title}} <small>{{exam.createdAt}}</small></h1>
   </div>
+  <app-exam-question-list><app-exam-question-list>
   `
 })
 export class ExamComponent implements OnInit {

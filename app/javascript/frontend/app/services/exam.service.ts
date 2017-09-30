@@ -15,9 +15,9 @@ export class ExamService {
     return this.http.get(this.url)
              .toPromise()
              .then(response =>  {
-               let exams: Exam[] = []
-               let exams_data = response.json()
-               for (let data of exams_data.data) {
+               const exams: Exam[] = []
+               const examsData = response.json()
+               for (let data of examsData.data) {
                  let exam: Exam = this.createExam(data);
                  exams.push(exam);
                }

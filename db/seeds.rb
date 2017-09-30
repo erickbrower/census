@@ -11,9 +11,9 @@ user = User.create(email: 'cerickbrower@gmail.com')
 
 exam = Exam.create(title: "Awesome test exam", user: user)
 
-question1 = Question.create(text: "What is your favorite color?", exam: exam)
-question2 = Question.create(text: "What is the square root of 4?", exam: exam)
-question3 = Question.create(text: "Who is the president of the US?", exam: exam)
+question1 = Question.create(number: 1, text: "What is your favorite color?", exam: exam)
+question2 = Question.create(number: 2, text: "What is the square root of 4?", exam: exam)
+question3 = Question.create(number: 3, text: "Who is the president of the US?", exam: exam)
 
 answer11 = Answer.create(text: "blue", question: question1)
 answer12 = Answer.create(text: "green", question: question1)
