@@ -7,7 +7,7 @@ RSpec.describe Api::V1::ExamsController, type: :controller do
       create_list(:exam, 5)
       get :index
       expect(response).to have_http_status(:success)
-      expect(response.body).to be_jsonapi_collection_response_for('exams')
+      expect(JSON.parse(response.body).length).to eq(5)
     end
   end
 
@@ -17,31 +17,32 @@ RSpec.describe Api::V1::ExamsController, type: :controller do
       new_exam = build(:exam, user: user)
       post :create, {
         params: {
-          data: {
-            type: 'exams',
-            attributes: {
-              title: new_exam.title,
-              user_id: user.id
-            }
+          exam: {
+            user_id: user.id,
+            title: new_exam.title
           }
         }
       }
       expect(response.status).to eq(201)
       expect(response.headers['Location']).to match(/\/exams\/\d$/)
-      expect(response.body).to be_jsonapi_response_for('exams')
+      created_exam = JSON.parse(response.body)
+      expect(created_exam['title']).to eq(new_exam.title)
+      expect(created_exam['user_id']).to eq(user.id)
     end
 
     it "responds with errors" do
       post :create, {
         params: {
-          data: {
-            type: 'exams',
-            attributes: {}
+          exam: {
+            title: '',
+            user_id: ''
           }
         }
       }
       expect(response.status).to eq(422)
-      expect(response.body).to have_jsonapi_errors_for('/data/attributes/title')
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['errors']).not_to be_nil
+      expect(parsed_response['errors'].length).to eq(2)
     end
   end
 
@@ -52,18 +53,15 @@ RSpec.describe Api::V1::ExamsController, type: :controller do
       put :update, {
         params: {
           id: exam.id,
-          data: {
-            type: 'exams',
-            attributes: {
-              title: new_title
-            }
+          exam: {
+            title: new_title
           }
         }
       }
       expect(response).to have_http_status(:success)
-      expect(response.body).to be_jsonapi_response_for('exams')
+      expect(response.headers['Location']).to eq("/api/v1/exams/#{exam.id}")
       parsed = JSON.parse(response.body)
-      expect(parsed.dig('data', 'attributes', 'title')).to eq(new_title)
+      expect(parsed['title']).to eq(new_title)
     end
   end
 

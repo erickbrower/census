@@ -10,7 +10,7 @@ class Api::V1::ExamsController < ApiController
   end
 
   def create
-    @exam = Exam.new(exam_attributes)
+    @exam = Exam.new(exam_params)
     if @exam.save
       render json: @exam,
              status: :created,
@@ -23,7 +23,7 @@ class Api::V1::ExamsController < ApiController
   def update
     @exam = Exam.where(id: params[:id]).first
     if @exam
-      if @exam.update_attributes(exam_attributes)
+      if @exam.update_attributes(exam_params)
         render json: @exam,
                location: "/api/v1/exams/#{@exam.id}"
       else
@@ -55,12 +55,6 @@ class Api::V1::ExamsController < ApiController
 
   private
   def exam_params
-    params.require(:data).permit(:type, {
-      attributes: [:title, :user_id]
-      })
-  end
-
-  def exam_attributes
-    exam_params[:attributes] || {}
+    params.require(:exam).permit(:title, :user_id)
   end
 end
