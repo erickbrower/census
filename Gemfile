@@ -34,8 +34,6 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
 gem 'bootstrap-sass', '~> 3.3.7'
 
-
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -64,6 +62,7 @@ group :development do
   gem 'guard'
   gem 'terminal-notifier-guard'
   gem 'guard-rspec', require: false
+  gem 'rubocop'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

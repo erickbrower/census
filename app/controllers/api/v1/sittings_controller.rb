@@ -1,21 +1,21 @@
 class Api::V1::SittingsController < ApiController
   def index
-    if params[:user_id]
-      @sittings = Sitting.where(user_id: params[:user_id]).all
-    elsif params[:exam_id]
-      @sittings = Sitting.where(exam_id: params[:exam_id]).all
-    else
-      @sittings = Sitting.all
-    end
+    @sittings = if params[:user_id]
+                  Sitting.where(user_id: params[:user_id]).all
+                elsif params[:exam_id]
+                  Sitting.where(exam_id: params[:exam_id]).all
+                else
+                  Sitting.all
+                end
     render json: @sittings
   end
 
   def create
-    @sitting = Sitting.new(sitting_attributes)
+    @sitting = Sitting.new(sitting_params)
     if @sitting.save
       render json: @sitting,
              status: :created,
-             location: "/api/v1/sittings/#{@sitting.id}"
+             location: location(@sitting.id)
     else
       respond_with_errors(@sitting)
     end
@@ -24,9 +24,9 @@ class Api::V1::SittingsController < ApiController
   def update
     @sitting = Sitting.where(id: params[:id]).first
     if @sitting
-      if @sitting.update_attributes(sitting_attributes)
+      if @sitting.update_attributes(sitting_params)
         render json: @sitting,
-               location: "/api/v1/sittings/#{@sitting.id}"
+               location: location(@sitting.id)
       else
         respond_with_errors(@sitting)
       end
@@ -55,13 +55,12 @@ class Api::V1::SittingsController < ApiController
   end
 
   private
+
   def sitting_params
-    params.require(:data).permit(:type, {
-      attributes: [:exam_id, :user_id, :score]
-      })
+    params.require(:sitting).permit(:exam_id, :user_id, :score)
   end
 
-  def sitting_attributes
-    sitting_params[:attributes] || {}
+  def location(id)
+    "/api/v1/sittings/#{id}"
   end
 end

@@ -1,11 +1,10 @@
 class Api::V1::ExamsController < ApiController
-
   def index
-    if params[:user_id]
-      @exams = Exam.where(user_id: params[:user_id]).all
-    else
-      @exams = Exam.all
-    end
+    @exams = if params[:user_id]
+               Exam.where(user_id: params[:user_id]).all
+             else
+               Exam.all
+             end
     render json: @exams
   end
 
@@ -54,6 +53,7 @@ class Api::V1::ExamsController < ApiController
   end
 
   private
+
   def exam_params
     params.require(:exam).permit(:title, :user_id)
   end

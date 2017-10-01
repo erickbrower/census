@@ -4,9 +4,9 @@ class Api::V1::UsersController < ApiController
   end
 
   def create
-    @user = User.new(user_attributes)
+    @user = User.new(user_params)
     if @user.save
-      render json: @user, status: :created, location: "/api/v1/users/#{@user.id}"
+      render json: @user, status: :created, location: location(@user.id)
     else
       respond_with_errors(@user)
     end
@@ -15,8 +15,8 @@ class Api::V1::UsersController < ApiController
   def update
     @user = User.where(id: params[:id]).first
     if @user
-      if @user.update_attributes(user_attributes)
-        render json: @user, location: "/api/v1/users/#{@user.id}"
+      if @user.update_attributes(user_params)
+        render json: @user, location: location(@user.id)
       else
         respond_with_errors(@user)
       end
@@ -28,7 +28,7 @@ class Api::V1::UsersController < ApiController
   def show
     @user = User.where(params[:id]).first
     if @user
-      render json: @user, location: "/api/v1/users/#{@user.id}"
+      render json: @user, location: location(@user.id)
     else
       render json: {}, status: :not_found
     end
@@ -45,13 +45,12 @@ class Api::V1::UsersController < ApiController
   end
 
   private
+
   def user_params
-    params.require(:data).permit(:type, {
-      attributes: [:email, :password, :password_confirmation]
-      })
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 
-  def user_attributes
-    user_params[:attributes] || {}
+  def location(id)
+    "/api/v1/users/#{id}"
   end
 end

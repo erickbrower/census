@@ -1,18 +1,18 @@
 class Api::V1::QuestionsController < ApiController
   def index
-    if params[:exam_id]
-      @questions = Question
-        .where(exam_id: params[:exam_id])
-        .order(:number)
-        .all
-    else
-      @questions = Question.all
-    end
+    @questions = if params[:exam_id]
+                   Question
+                     .where(exam_id: params[:exam_id])
+                     .order(:number)
+                     .all
+                 else
+                   Question.all
+                 end
     render json: @questions
   end
 
   def create
-    @question = Question.new(question_attributes)
+    @question = Question.new(question_params)
     if @question.save
       render json: @question,
              status: :created,
@@ -25,7 +25,7 @@ class Api::V1::QuestionsController < ApiController
   def update
     @question = Question.where(id: params[:id]).first
     if @question
-      if @question.update_attributes(question_attributes)
+      if @question.update_attributes(question_params)
         render json: @question,
                location: "/api/v1/questions/#{@question.id}"
       else
@@ -56,13 +56,8 @@ class Api::V1::QuestionsController < ApiController
   end
 
   private
-  def question_params
-    params.require(:data).permit(:type, {
-      attributes: [:text, :exam_id]
-      })
-  end
 
-  def question_attributes
-    question_params[:attributes] || {}
+  def question_params
+    params.require(:question).permit(:text, :exam_id)
   end
 end
