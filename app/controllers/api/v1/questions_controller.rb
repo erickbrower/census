@@ -8,7 +8,7 @@ class Api::V1::QuestionsController < ApiController
                  else
                    Question.all
                  end
-    render json: @questions
+    render json: @questions, include: [:answers]
   end
 
   def create

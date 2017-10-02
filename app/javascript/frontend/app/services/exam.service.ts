@@ -14,29 +14,12 @@ export class ExamService {
   getExams(): Promise<Exam[]> {
     return this.http.get(this.url)
              .toPromise()
-             .then(response =>  {
-               const exams: Exam[] = []
-               const examsData = response.json()
-               for (let data of examsData.data) {
-                 let exam: Exam = this.createExam(data);
-                 exams.push(exam);
-               }
-               return exams;
-             })
+             .then(response => response.json() as Exam[])
   }
 
   getExam(id: string): Promise<Exam> {
     return this.http.get(this.url + '/' + id)
       .toPromise()
-      .then(response => this.createExam(response.json().data))
-  }
-
-  private createExam(data): Exam {
-    let exam: Exam = new Exam();
-    exam.id = data.id;
-    exam.title = data.attributes.title;
-    exam.createdAt = data.attributes["created-at"];
-    exam.updatedAt = data.attributes["updated-at"];
-    return exam;
+      .then(response => response.json() as Exam)
   }
 }

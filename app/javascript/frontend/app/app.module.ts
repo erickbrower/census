@@ -3,8 +3,6 @@ import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router'
 
-import { AnswerComponent } from './components/answer.component';
-import { AnswerListComponent } from './components/answer-list.component';;
 import { AnswerService } from './services/answer.service';
 import { AppComponent } from './components/app.component';
 import { ExamComponent } from './components/exam.component';
@@ -16,8 +14,6 @@ import { QuestionService } from './services/question.service';
 
 @NgModule({
   declarations: [
-    AnswerComponent
-    AnswerListComponent,
     AppComponent,
     ExamComponent,
     ExamListComponent,

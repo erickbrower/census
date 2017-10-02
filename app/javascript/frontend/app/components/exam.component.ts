@@ -11,9 +11,9 @@ import 'rxjs/add/operator/switchMap';
   selector: 'app-exam',
   template: `
   <div class="page-header">
-    <h1>{{exam.title}} <small>{{exam.createdAt}}</small></h1>
+    <h1>{{exam.title}} <small>{{exam.created_at}}</small></h1>
   </div>
-  <app-exam-question-list><app-exam-question-list>
+  <app-exam-question-list></app-exam-question-list>
   `
 })
 export class ExamComponent implements OnInit {

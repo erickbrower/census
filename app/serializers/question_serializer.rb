@@ -5,5 +5,7 @@ class QuestionSerializer < ActiveModel::Serializer
              :text,
              :created_at,
              :updated_at
-             
+
+  has_many :answers
+  belongs_to :exam
 end

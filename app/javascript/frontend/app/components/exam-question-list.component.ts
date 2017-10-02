@@ -21,7 +21,15 @@ import 'rxjs/add/operator/switchMap';
       <tr>
         <td></td>
         <td>
-          <app-answer-list [question]="question"></app-answer-list>
+          <div class="container">
+            <div class="col-md-12" *ngFor="let answer of question.answers">
+              <div class="col-md-1">
+                <input type="radio" name="{{question.id}}" value="{{answer.id}}">
+                <strong>{{answer.letter}}.</strong>
+              </div>
+              <div class="col-md-11">{{answer.text}}</div>
+            </div>
+          </div>
         </td>
       </tr>
     </table>
