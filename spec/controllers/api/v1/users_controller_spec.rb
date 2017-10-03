@@ -10,62 +10,62 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
   end
 
-  describe 'POST #create' do
-    it 'responds successfully' do
-      new_user = build(:user)
-      post :create, params: {
-        user: {
-          email: new_user.email,
-          password: new_user.password,
-          password_confirmation: new_user.password_confirmation
-        }
-      }
-      expect(response.status).to eq(201)
-      expect(response.headers['Location']).to match(/\/users\/\d$/)
-      parsed_data = JSON.parse(response.body)
-      expect(parsed_data['email']).to eq(new_user.email)
-    end
-
-    it 'responds with errors' do
-      post :create, params: {
-        user: {
-          email: ''
-        }
-      }
-      expect(response.status).to eq(422)
-      parsed_data = JSON.parse(response.body)
-      expect(parsed_data['errors']).not_to be_empty
-    end
-  end
-
-  describe 'PUT #update' do
-    it 'responds successfully' do
-      user = create(:user)
-      new_email = 'test@test.com'
-      put :update, params: {
-        id: user.id,
-        user: {
-          email: new_email
-        }
-      }
-      expect(response).to have_http_status(:success)
-      parsed_data = JSON.parse(response.body)
-      expect(parsed_data['email']).to eq(new_email)
-    end
-
-    it 'responds with errors' do
-      user = create(:user)
-      put :update, params: {
-        id: user.id,
-        user: {
-          email: ''
-        }
-      }
-      expect(response.status).to eq(422)
-      parsed_data = JSON.parse(response.body)
-      expect(parsed_data['errors']).not_to be_empty
-    end
-  end
+  # describe 'POST #create' do
+  #   it 'responds successfully' do
+  #     new_user = build(:user)
+  #     post :create, params: {
+  #       user: {
+  #         email: new_user.email,
+  #         password: new_user.password,
+  #         password_confirmation: new_user.password_confirmation
+  #       }
+  #     }
+  #     expect(response.status).to eq(201)
+  #     expect(response.headers['Location']).to match(/\/users\/\d$/)
+  #     parsed_data = JSON.parse(response.body)
+  #     expect(parsed_data['email']).to eq(new_user.email)
+  #   end
+  #
+  #   it 'responds with errors' do
+  #     post :create, params: {
+  #       user: {
+  #         email: ''
+  #       }
+  #     }
+  #     expect(response.status).to eq(422)
+  #     parsed_data = JSON.parse(response.body)
+  #     expect(parsed_data['errors']).not_to be_empty
+  #   end
+  # end
+  #
+  # describe 'PUT #update' do
+  #   it 'responds successfully' do
+  #     user = create(:user)
+  #     new_email = 'test@test.com'
+  #     put :update, params: {
+  #       id: user.id,
+  #       user: {
+  #         email: new_email
+  #       }
+  #     }
+  #     expect(response).to have_http_status(:success)
+  #     parsed_data = JSON.parse(response.body)
+  #     expect(parsed_data['email']).to eq(new_email)
+  #   end
+  #
+  #   it 'responds with errors' do
+  #     user = create(:user)
+  #     put :update, params: {
+  #       id: user.id,
+  #       user: {
+  #         email: ''
+  #       }
+  #     }
+  #     expect(response.status).to eq(422)
+  #     parsed_data = JSON.parse(response.body)
+  #     expect(parsed_data['errors']).not_to be_empty
+  #   end
+  # end
 
   describe 'GET #show' do
     it 'returns http success' do

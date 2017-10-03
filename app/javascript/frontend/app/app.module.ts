@@ -1,16 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router'
-
 import { AnswerService } from './services/answer.service';
 import { AppComponent } from './components/app.component';
+import { AuthService } from './services/auth.service';
+import { BrowserModule } from '@angular/platform-browser';
 import { ExamComponent } from './components/exam.component';
 import { ExamListComponent } from './components/exam-list.component';
 import { ExamQuestionListComponent } from './components/exam-question-list.component';
 import { ExamService } from './services/exam.service';
+import { HttpModule } from '@angular/http';
+import { LoginComponent } from './components/login.component';
 import { NavbarComponent } from './components/navbar.component';
+import { NgModule } from '@angular/core';
 import { QuestionService } from './services/question.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router'
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { QuestionService } from './services/question.service';
     ExamComponent,
     ExamListComponent,
     ExamQuestionListComponent,
+    LoginComponent,
     NavbarComponent,
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {
         path: '',
@@ -31,11 +35,16 @@ import { QuestionService } from './services/question.service';
       {
         path: 'exams/:id',
         component: ExamComponent
+      },
+      {
+        path: 'login',
+        component: LoginComponent
       }
     ])
   ],
   providers: [
-    AnswerService
+    AnswerService,
+    AuthService,
     ExamService,
     QuestionService,
   ],

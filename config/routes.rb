@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root to: 'pages#index'
 
   namespace :api do
@@ -19,6 +20,8 @@ Rails.application.routes.draw do
         resources :answers, only: [:index, :create, :update, :show, :destroy]
       end
       resources :answers, only: [:index, :create, :update, :show, :destroy]
+
+      post 'authenticate' => 'authentication#authenticate'
     end
   end
 

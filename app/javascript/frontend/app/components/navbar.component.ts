@@ -12,14 +12,13 @@ import { Component, OnInit } from '@angular/core';
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Census</a>
+        <a [routerLink]="['/']" class="navbar-brand">Census</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a [routerLink]="['/']">Home</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">New Exam</a></li>
+          <li><a [routerLink]="['/login']">Login</a></li>
         </ul>
       </div>
     </div>
