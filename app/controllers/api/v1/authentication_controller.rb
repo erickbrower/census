@@ -5,7 +5,12 @@ class Api::V1::AuthenticationController < ApiController
       render json: payload(user)
     else
       render json: {
-        errors: ['Invalid Username/Password']
+        errors: [
+          {
+            field: 'username',
+            message: 'Invalid username or password'
+          }
+        ]
       },
       status: :unauthorized
     end

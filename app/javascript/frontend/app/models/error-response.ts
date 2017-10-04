@@ -1,3 +1,5 @@
+import { FieldError } from './field-error'
+
 export class ErrorResponse {
-  messages: Array<string>
+  errors: Array<FieldError>
 }

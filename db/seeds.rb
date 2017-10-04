@@ -7,7 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-user = User.create(email: 'cerickbrower@gmail.com')
+user = User.create(
+  email: 'cerickbrower@gmail.com',
+  password: 'asdfasdf',
+  password_confirmation: 'asdfasdf'
+)
 
 exam = Exam.create(title: "Awesome test exam", user: user)
 
