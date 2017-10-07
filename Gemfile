@@ -65,6 +65,7 @@ group :development do
   gem 'terminal-notifier-guard'
   gem 'guard-rspec', require: false
   gem 'rubocop'
+  gem 'rails-erd', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
