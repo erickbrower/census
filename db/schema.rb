@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171007141141) do
+ActiveRecord::Schema.define(version: 20171007141439) do
 
   create_table "answers", force: :cascade do |t|
     t.string "text"
@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 20171007141141) do
     t.float "score"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["assignment_id"], name: "index_scores_on_assignment_id"
+    t.index ["user_id"], name: "index_scores_on_user_id"
   end
 
   create_table "sittings", force: :cascade do |t|
